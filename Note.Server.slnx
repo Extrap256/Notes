@@ -1,0 +1,23 @@
+<Solution>
+  <Folder Name="/docs/">
+    <File Path="docs/01-architecture.md" />
+    <File Path="docs/02-authentication.md" />
+    <File Path="docs/03-api-reference.md" />
+    <File Path="docs/04-data-models.md" />
+    <File Path="docs/06-sync-strategy.md" />
+    <File Path="docs/07-conventions.md" />
+    <File Path="docs/README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Notes.Api/Notes.Api.csproj" />
+    <Project Path="src/Notes.Application/Notes.Application.csproj" Id="84118abf-2ce2-4529-ac84-127956118e98" />
+    <Project Path="src/Notes.Domain/Notes.Domain.csproj" Id="d55d7879-a829-4def-b83b-17d8e9547f0d" />
+    <Project Path="src/Notes.Infrastructure/Notes.Infrastructure.csproj" Id="2d1f18fc-f4e6-4ccb-b602-c7b0b526e709" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Notes.Api.Tests/Notes.Api.Tests.csproj" Id="cf56c95d-5f13-4179-bf63-7b6c3785d971" />
+    <Project Path="tests/Notes.Application.Tests/Notes.Application.Tests.csproj" Id="30d7c3dc-cb76-4090-a633-5aeac2adeef4" />
+    <Project Path="tests/Notes.Domain.Tests/Notes.Domain.Tests.csproj" Id="ebc6dfbe-a8ec-4ec4-afca-452e7894ff72" />
+    <Project Path="tests/Notes.Infrastructure.Tests/Notes.Infrastructure.Tests.csproj" Id="3413b292-5673-4b04-8619-51a7611229a4" />
+  </Folder>
+</Solution>
