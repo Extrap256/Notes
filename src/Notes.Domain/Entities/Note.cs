@@ -20,28 +20,8 @@
         public string Content { get; set; }
         public bool IdDeleted { get; set; }
         public DateTime CreatedAt { get; init; }
-        public DateTime UpdatedUp
-        {
-            get;
-            set
-            {
-                if (value < CreatedAt)
-                    throw new DomainException("Время изменения заметки не может быть раньше ее создания");
-
-                field = value;
-            }
-        }
-        public int Version
-        {
-            get;
-            set
-            {
-                if (value < 1)
-                    throw new DomainException("Версия заметки должна быть положительной");
-
-                field = value;
-            }
-        }
+        public DateTime UpdatedUp { get; private set; }
+        public int Version { get; private set; }
 
         public User Owner { get; init; }
 
@@ -55,6 +35,12 @@
             CreatedAt = DateTime.UtcNow;
             UpdatedUp = DateTime.UtcNow;
             Version = version;
+        }
+
+        public void Update()
+        {
+            UpdatedUp = DateTime.UtcNow;
+            Version += 1;
         }
     }
 }
