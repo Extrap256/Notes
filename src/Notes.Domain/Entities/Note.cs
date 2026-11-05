@@ -7,7 +7,7 @@
         public string Title
         {
             get;
-            set
+            private set
             {
                 if (value.Length == 0)
                     throw new DomainException("Заголовок заметки не должен быть пустым");
@@ -17,8 +17,8 @@
                 field = value;
             }
         }
-        public string Content { get; set; }
-        public bool IdDeleted { get; set; }
+        public string Content { get; private set; }
+        public bool IsDeleted { get; private set; }
         public DateTime CreatedAt { get; init; }
         public DateTime UpdatedUp { get; private set; }
         public int Version { get; private set; }
@@ -31,14 +31,24 @@
             Owner = author;
             Title = title;
             Content = content;
-            IdDeleted = isDeleted;
+            IsDeleted = isDeleted;
             CreatedAt = DateTime.UtcNow;
             UpdatedUp = DateTime.UtcNow;
             Version = version;
         }
 
-        public void Update()
+        public void Update(string newTitle, string newContent)
         {
+            Title = newTitle;
+            Content = newContent;
+            UpdatedUp = DateTime.UtcNow;
+            Version += 1;
+        }
+        public void Update(string newTitle, string newContent, bool isDeleted)
+        {
+            Title = newTitle;
+            Content = newContent;
+            IsDeleted = isDeleted;
             UpdatedUp = DateTime.UtcNow;
             Version += 1;
         }
