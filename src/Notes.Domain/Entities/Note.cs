@@ -20,7 +20,7 @@
         public string Content { get; private set; }
         public bool IsDeleted { get; private set; }
         public DateTime CreatedAt { get; init; }
-        public DateTime UpdatedUp { get; private set; }
+        public DateTime UpdatedAt { get; private set; }
         public int Version { get; private set; }
 
         public User Owner { get; init; }
@@ -33,7 +33,7 @@
             Content = content;
             IsDeleted = isDeleted;
             CreatedAt = DateTime.UtcNow;
-            UpdatedUp = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
             Version = version;
         }
 
@@ -41,7 +41,7 @@
         {
             Title = newTitle;
             Content = newContent;
-            UpdatedUp = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
             Version += 1;
         }
         public void Update(string newTitle, string newContent, bool isDeleted)
@@ -49,7 +49,7 @@
             Title = newTitle;
             Content = newContent;
             IsDeleted = isDeleted;
-            UpdatedUp = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
             Version += 1;
         }
     }
