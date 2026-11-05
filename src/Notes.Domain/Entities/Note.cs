@@ -45,13 +45,13 @@
 
         public User Owner { get; init; }
 
-        public Note(User author, string title, string content, int version = 1, bool idDeleted = false)
+        public Note(User author, string title, string content, int version = 1, bool isDeleted = false)
         {
             Id = Guid.NewGuid();
             Owner = author;
             Title = title;
             Content = content;
-            IdDeleted = idDeleted;
+            IdDeleted = isDeleted;
             CreatedAt = DateTime.UtcNow;
             UpdatedUp = DateTime.UtcNow;
             Version = version;
