@@ -16,12 +16,13 @@
             }
         }
         public string Password { get; init; }
-
+        public List<Note> Notes { get; set; }
         public User(string login, string password)
         {
             Id = Guid.NewGuid();
             Login = login;
             Password = password;
+            Notes = new();
         }
     }
 }
