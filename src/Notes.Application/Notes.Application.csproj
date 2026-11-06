@@ -10,8 +10,4 @@
     <ProjectReference Include="..\Notes.Domain\Notes.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\Application\" />
-  </ItemGroup>
-
 </Project>
