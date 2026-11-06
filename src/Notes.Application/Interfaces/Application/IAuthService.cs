@@ -1,6 +1,4 @@
-﻿using Notes.Application.DTO;
-using Notes.Application.Models;
-using Notes.Domain.Entities;
+﻿using Notes.Application.Models;
 
 namespace Notes.Application.Interfaces.Application
 {
@@ -12,7 +10,7 @@ namespace Notes.Application.Interfaces.Application
         /// <param name="login">Логин пользователя</param>
         /// <param name="password">Пароль пользователя</param>
         /// <returns>true, если успешно. false, если логин уже занят</returns>
-        public Task<RegisterResult> Register(string login, string password);
+        public Task<RegisterResult> RegisterAsync(string login, string password, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Войти пользователю
@@ -20,6 +18,6 @@ namespace Notes.Application.Interfaces.Application
         /// <param name="login">Логин пользователя</param>
         /// <param name="password">Пароль пользователя</param>
         /// <returns></returns>
-        public Task<LoginResult> Login(string login, string password);
+        public Task<LoginResult> LoginAsync(string login, string password, CancellationToken cancellationToken = default);
     }
 }
