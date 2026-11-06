@@ -7,6 +7,6 @@
         /// </summary>
         /// <param name="payload">Хешируемая строка</param>
         /// <returns>Хеш строки</returns>
-        public string Hash(string payload);
+        public Task<string> Hash(string payload);
     }
 }
