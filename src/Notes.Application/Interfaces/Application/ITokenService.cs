@@ -17,5 +17,12 @@ namespace Notes.Application.Interfaces.Application
         /// <param name="userId">Id пользователя</param>
         /// <returns>Пара новых токенов или null, если пользователь не существует</returns>
         public Task<AuthPairTokenModel?> GetPairTokens(Guid userId);
+
+        /// <summary>
+        /// Находит юзера по access токену
+        /// </summary>
+        /// <param name="token">assecc токен пользователя</param>
+        /// <returns>UserId или null, если пользователя не существует</returns>
+        public Task<Guid?> GetUserByAccessToken(string token);
     }
 }
