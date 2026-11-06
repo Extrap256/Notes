@@ -5,7 +5,6 @@
         public enum ErrorCode
         {
             AllGood,
-            ValidationError,
             UserAlreadyExist
         }
 
