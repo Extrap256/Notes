@@ -9,14 +9,14 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// </summary>
         /// <param name="user">Объект пользователя</param>
         /// <returns>true, если добавление успешно и false, если пользователь с таким id уже существует</returns>
-        public Task<bool> AddUser(User user);
+        public Task<bool> AddUserAsync(User user, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Находит пользователя
         /// </summary>
         /// <param name="userId">Id нужного пользователя</param>
         /// <returns>Объект пользователя или null в случае его отсутствия</returns>
-        public Task<User?> GetUser(Guid userId);
+        public Task<User?> GetUserAsync(Guid userId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Обновить пользователя
@@ -24,6 +24,6 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// <param name="userId">Id нужного пользователя</param>
         /// <param name="passwordHash">Новый хеш пароля</param>
         /// <returns>true, если пользователь успешно обновлен. false, если изменений не было. null, если пользователь не существует</returns>
-        public Task<bool?> UpdateUser(Guid userId, string passwordHash);
+        public Task<bool?> UpdateUserAsync(Guid userId, string passwordHash, CancellationToken cancellationToken = default);
     }
 }

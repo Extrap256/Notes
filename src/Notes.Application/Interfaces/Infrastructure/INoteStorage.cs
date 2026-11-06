@@ -9,20 +9,20 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// </summary>
         /// <param name="userId">Id пользователя</param>
         /// <returns>Список заметок или null, если пользователь не найден</returns>
-        public Task<List<Note>?> GetNotesList(Guid userId);
+        public Task<List<Note>?> GetNotesListAsync(Guid userId, CancellationToken cancellationToken = default);
         
         /// <summary>
         /// Находит заметку по ее Id
         /// </summary>
         /// <param name="noteId">Id заметки</param>
         /// <returns>Объект заметки или null, если ее не существует</returns>
-        public Task<Note?> GetNote(Guid noteId);
+        public Task<Note?> GetNoteAsync(Guid noteId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Добавляет заметку
         /// </summary>
         /// <param name="note">Добавляемая заметка</param>
-        public Task AddNote(Note note);
+        public Task AddNoteAsync(Note note, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Обновляет заметку
@@ -31,13 +31,13 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// <param name="title">Новый заголовок</param>
         /// <param name="content">Новое содержимое</param>
         /// <returns>Версия новой заметки или null, если ее не существует</returns>
-        public Task<int?> Update(Guid noteId, string title, string content);
+        public Task<int?> UpdateAsync(Guid noteId, string title, string content, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Помечает существующую заметку как удаленную
         /// </summary>
         /// <param name="noteId">Id существующей заметки</param>
         /// <returns>true, если операция успешна. false, если заметка уже была удалена. null, если заметки не существует</returns>
-        public Task<bool?> Delete(Guid noteId);
+        public Task<bool?> DeleteAsync(Guid noteId, CancellationToken cancellationToken = default);
     }
 }
