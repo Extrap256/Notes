@@ -1,6 +1,6 @@
 ﻿using Notes.Application.DTO;
 
-namespace Notes.Application.Interfaces
+namespace Notes.Application.Interfaces.Infrastructure
 {
     public interface ITokenStorage
     {

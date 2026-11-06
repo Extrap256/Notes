@@ -1,6 +1,6 @@
 ﻿using Notes.Domain.Entities;
 
-namespace Notes.Application.Interfaces
+namespace Notes.Application.Interfaces.Infrastructure
 {
     public interface IUserStorage
     {
