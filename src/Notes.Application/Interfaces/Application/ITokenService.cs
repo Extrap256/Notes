@@ -1,5 +1,4 @@
-﻿using Notes.Application.DTO;
-using Notes.Application.Models;
+﻿using Notes.Application.Models;
 
 namespace Notes.Application.Interfaces.Application
 {
