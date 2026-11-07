@@ -1,6 +1,6 @@
 ﻿namespace Notes.Application.Interfaces.Infrastructure
 {
-    interface IDateTimeProvider
+    public interface IDateTimeProvider
     {
         /// <summary>
         /// Конвертировать строку в DateTime
