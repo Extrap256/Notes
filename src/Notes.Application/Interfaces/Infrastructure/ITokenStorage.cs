@@ -9,27 +9,27 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// </summary>
         /// <param name="token">Новый Refresh токен</param>
         /// <returns>true, если успешно. false, если уже токен с таким хешем уже есть</returns>
-        public Task<bool> AddTokenAsync(StoredRefreshTokenModel token, CancellationToken cancellationToken = default);
+        public Task<bool> AddTokenAsync(RefreshTokenModel token, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Получить все активные токены пользователя
         /// </summary>
         /// <param name="userId">Id пользователя</param>
         /// <returns>Список всех активных токенов пользователя. null в случае отсутствия ползователя</returns>
-        public Task<List<StoredRefreshTokenModel>?> GetAllActiveTokensAsync(Guid userId, CancellationToken cancellationToken = default);
+        public Task<List<RefreshTokenModel>?> GetAllActiveTokensAsync(Guid userId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Получить все токены пользователя
         /// </summary>
         /// <param name="userId">Id пользователя</param>
         /// <returns>Список всех токенов пользователя. null в случае отсутствия ползователя</returns>
-        public Task<List<StoredRefreshTokenModel>?> GetAllTokensAsync(Guid userId, CancellationToken cancellationToken = default);
+        public Task<List<RefreshTokenModel>?> GetAllTokensAsync(Guid userId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Отозвать токен
         /// </summary>
         /// <param name="token">Токен, который нужно отозвать</param>
         /// <returns>true, если отозвано успешно. false, если токен уже был отозван. null, если токена не существует</returns>
-        public Task<bool?> RevokeAsync(StoredRefreshTokenModel token, CancellationToken cancellationToken = default);
+        public Task<bool?> RevokeAsync(RefreshTokenModel token, CancellationToken cancellationToken = default);
     }
 }
