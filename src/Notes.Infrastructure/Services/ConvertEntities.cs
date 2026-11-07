@@ -43,15 +43,20 @@ namespace Notes.Infrastructure.Services
             return storageNote;
         }
 
-        public static void ApplyChanges(NoteStorageEntity target, Note sorce)
+        /// <summary>
+        /// Обновляет target в соответствии с source
+        /// </summary>
+        /// <param name="target">Объект модели хранения для обновления</param>
+        /// <param name="source">Объект модели domain, служащий источником</param>
+        public static void ApplyChanges(NoteStorageEntity target, Note source)
         {
-            target.Id = sorce.Id;
-            target.Title = sorce.Title;
-            target.Content = sorce.Content;
-            target.CreatedAt = sorce.CreatedAt;
-            target.UpdatedAt = sorce.UpdatedAt;
-            target.Version = sorce.Version;
-            target.DeletedAt = sorce.IsDeleted ? sorce.UpdatedAt : null;
+            target.Id = source.Id;
+            target.Title = source.Title;
+            target.Content = source.Content;
+            target.CreatedAt = source.CreatedAt;
+            target.UpdatedAt = source.UpdatedAt;
+            target.Version = source.Version;
+            target.DeletedAt = source.IsDeleted ? source.UpdatedAt : null;
         }
 
 
@@ -79,10 +84,20 @@ namespace Notes.Infrastructure.Services
             return storageUser;
         }
 
-
+        /// <summary>
+        /// Обновляет target в соответствии с source
+        /// </summary>
+        /// <param name="target">Объект модели хранения для обновления</param>
+        /// <param name="source">Объект модели domain, служащий источником</param>
+        public static void ApplyChanges(UserStorageEntity target, User source)
+        {
+            target.Id = source.Id;
+            target.Login = source.Login;
+            target.Password = source.Password;
+        }
 
         /// <summary>
-        /// Преобразует сущность хранения пользователя в доменную
+        /// Преобразует сущность хранения токена в сущность приложения
         /// </summary>
         /// <param name="storageEntity">Модель токена для хранения</param>
         /// <returns>Восстановленный refresh токен</returns>
