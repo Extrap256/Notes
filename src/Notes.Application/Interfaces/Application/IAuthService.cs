@@ -2,7 +2,7 @@
 
 namespace Notes.Application.Interfaces.Application
 {
-    internal interface IAuthService
+    public interface IAuthService
     {
         /// <summary>
         /// Зарегистрировать нового пользователя
