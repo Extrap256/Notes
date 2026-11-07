@@ -5,7 +5,7 @@ using Notes.Infrastructure.Data;
 
 namespace Notes.Infrastructure.Services
 {
-    class UserStorage (NotesServerDBContext context) : IUserStorage
+    public class UserStorage (NotesServerDBContext context) : IUserStorage
     {
         private readonly NotesServerDBContext _dbContext = context;
 
