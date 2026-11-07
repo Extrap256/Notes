@@ -17,6 +17,8 @@ namespace Notes.Infrastructure.Services
             var userStorage = ConvertEntities.ToStorageEntity(user);
             await _dbContext.Users.AddAsync(userStorage, cancellationToken);
 
+            await _dbContext.SaveChangesAsync(cancellationToken);
+
             return true;
         }
 
