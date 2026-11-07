@@ -11,9 +11,7 @@ namespace Notes.Infrastructure.Data
 
         public NotesServerDBContext(DbContextOptions<NotesServerDBContext> contextOptions)
             : base(contextOptions)
-        {
-            Database.EnsureCreated();
-        }
+        { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
