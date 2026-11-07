@@ -5,9 +5,9 @@ namespace Notes.Infrastructure.Data
 {
     public class NotesServerDBContext : DbContext
     {
-        public List<NoteStorageEntity> Notes { get; set; } = null!;
-        public List<UserStorageEntity> Users { get; set; } = null!;
-        public List<RefreshTokenStorageEntity> RefreshTokens { get; set; } = null!;
+        public DbSet<NoteStorageEntity> Notes { get; set; } = null!;
+        public DbSet<UserStorageEntity> Users { get; set; } = null!;
+        public DbSet<RefreshTokenStorageEntity> RefreshTokens { get; set; } = null!;
 
         public NotesServerDBContext(DbContextOptions<NotesServerDBContext> contextOptions)
             : base(contextOptions)
