@@ -83,6 +83,8 @@ namespace Notes.Infrastructure.Services
             noteDomain.Update(title, content);
             ConvertEntities.ApplyChanges(note, noteDomain);
 
+            await _dbContext.SaveChangesAsync(cancellationToken);
+
             return note.Version;
         }
     }
