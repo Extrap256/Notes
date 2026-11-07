@@ -1,6 +1,6 @@
 ﻿namespace Notes.Infrastructure.Data.Entities
 {
-    public class RefreshTokenEntity
+    public class RefreshTokenStorageEntity
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
@@ -9,7 +9,7 @@
         public DateTime ExpiresAt { get; set; }
         public DateTime? RevokedAt {  get; set; }
 
-        public RefreshTokenEntity(Guid id, Guid userId, string hash, DateTime createdAt, DateTime expiresAt, DateTime? revokedAt)
+        public RefreshTokenStorageEntity(Guid id, Guid userId, string hash, DateTime createdAt, DateTime expiresAt, DateTime? revokedAt)
         {
             Id = id;
             UserId = userId;
