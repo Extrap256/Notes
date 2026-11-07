@@ -23,12 +23,12 @@
         public DateTime UpdatedAt { get; private set; }
         public int Version { get; private set; }
 
-        public User Owner { get; init; }
+        public Guid UserId { get; set; }
 
-        public Note(User author, string title, string content, int version = 1, bool isDeleted = false)
+        public Note(Guid userId, string title, string content, int version = 1, bool isDeleted = false)
         {
             Id = Guid.NewGuid();
-            Owner = author;
+            UserId = userId;
             Title = title;
             Content = content;
             IsDeleted = isDeleted;

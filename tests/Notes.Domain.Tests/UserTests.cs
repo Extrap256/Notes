@@ -60,8 +60,7 @@ namespace Notes.Domain.Tests
 
             Assert.Multiple(
                 () => Assert.Equal(validLogin, user.Login),
-                () => Assert.Equal(validPassword, user.Password),
-                () => Assert.Equal([], user.Notes)
+                () => Assert.Equal(validPassword, user.Password)
             );
         }
     }

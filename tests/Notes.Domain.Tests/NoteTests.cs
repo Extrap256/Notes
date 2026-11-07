@@ -12,7 +12,7 @@ namespace Notes.Domain.Tests
 
             string title = "MyTitle";
             string content = "Я сегодня позавтракал";
-            var note = new Note(user, title, content, version: 1, isDeleted: false);
+            var note = new Note(user.Id, title, content, version: 1, isDeleted: false);
 
             Assert.Equal(4, note.Id.Version);
         }
@@ -25,7 +25,7 @@ namespace Notes.Domain.Tests
             string title = "";
             string content = "Пора в магаз";
 
-            var exception = Assert.Throws<DomainException>(() => new Note(user, title, content));
+            var exception = Assert.Throws<DomainException>(() => new Note(user.Id, title, content));
 
             Assert.Equal("Заголовок заметки не должен быть пустым", exception.Message);
         }
@@ -38,7 +38,7 @@ namespace Notes.Domain.Tests
             string title = new string('a', 1000);
             string content = "Пора в магаз";
 
-            var exception = Assert.Throws<DomainException>(() => new Note(user, title, content));
+            var exception = Assert.Throws<DomainException>(() => new Note(user.Id, title, content));
 
             Assert.Equal($"Длина заголовка заметки не может превышать {titleMaxLength} сиволов", exception.Message);
         }
@@ -53,7 +53,7 @@ namespace Notes.Domain.Tests
             var user = new User("Login", "Password");
             string title = "Верный заголовок";
 
-            var note = new Note(user, title, validContent);
+            var note = new Note(user.Id, title, validContent);
 
             Assert.Equal(validContent, note.Content);
         }
@@ -66,7 +66,7 @@ namespace Notes.Domain.Tests
             string title = "Заголовок";
             string content = "Пора в магаз";
 
-            var note = new Note(user, title, content);
+            var note = new Note(user.Id, title, content);
 
             Assert.False(note.IsDeleted);
         }
@@ -80,7 +80,7 @@ namespace Notes.Domain.Tests
             string content = "Пора в магаз";
 
             DateTime start = DateTime.UtcNow;
-            var note = new Note(user, title, content);
+            var note = new Note(user.Id, title, content);
             DateTime end = DateTime.UtcNow;
 
             Assert.InRange(note.CreatedAt, start, end);
@@ -95,7 +95,7 @@ namespace Notes.Domain.Tests
             string content = "Пора в магаз";
 
             DateTime start = DateTime.UtcNow;
-            var note = new Note(user, title, content);
+            var note = new Note(user.Id, title, content);
             DateTime end = DateTime.UtcNow;
 
             Assert.InRange(note.UpdatedAt, start, end);
@@ -109,7 +109,7 @@ namespace Notes.Domain.Tests
             string title = "Заголовок";
             string content = "Пора в магаз";
 
-            var note = new Note(user, title, content);
+            var note = new Note(user.Id, title, content);
             
             DateTime start = DateTime.UtcNow;
             note.Update(title, content);
@@ -126,7 +126,7 @@ namespace Notes.Domain.Tests
             string title = "Заголовок";
             string content = "Пора в магаз";
 
-            var note = new Note(user, title, content);
+            var note = new Note(user.Id, title, content);
 
             Assert.Equal(1, note.Version);
         }
@@ -138,7 +138,7 @@ namespace Notes.Domain.Tests
         {
             var user = new User("Login", "Password");
 
-            var note = new Note(user, "Title", "Content");
+            var note = new Note(user.Id, "Title", "Content");
             var exception = Assert.Throws<DomainException>(() => note.Update(title, content));
 
             Assert.Equal(verdict, exception.Message);
@@ -151,7 +151,7 @@ namespace Notes.Domain.Tests
             string title = "Заголовок";
             string content = "Пошел в магаз";
 
-            var note = new Note(user, "Title", "Content");
+            var note = new Note(user.Id, "Title", "Content");
             note.Update(title, content);
 
             Assert.Multiple(
