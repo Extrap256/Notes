@@ -18,5 +18,9 @@
             ExpiresAt = expiresAt;
             RevokedAt = revokedAt;
         }
+
+        // Конструктор для EF Core
+        private RefreshTokenStorageEntity()
+        { }
     }
 }
