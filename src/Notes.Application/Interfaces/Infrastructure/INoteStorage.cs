@@ -8,8 +8,8 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// Находит заметки конкретного пользователя
         /// </summary>
         /// <param name="userId">Id пользователя</param>
-        /// <returns>Список заметок или null, если пользователь не найден</returns>
-        public Task<List<Note>?> GetNotesListAsync(Guid userId, CancellationToken cancellationToken = default);
+        /// <returns>Список заметок</returns>
+        public Task<List<Note>> GetNotesListAsync(Guid userId, CancellationToken cancellationToken = default);
         
         /// <summary>
         /// Находит заметку по ее Id
