@@ -9,7 +9,7 @@ namespace Notes.Infrastructure.Services
 {
     public class NoteStorage(NotesServerDBContext dbContext) : INoteStorage
     {
-        private NotesServerDBContext _dbContext = dbContext;
+        private readonly NotesServerDBContext _dbContext = dbContext;
 
         /// <summary>
         /// Проверяет наличие заметки по текущему id
@@ -37,7 +37,7 @@ namespace Notes.Infrastructure.Services
             var note = await _dbContext.Notes.FirstOrDefaultAsync(x => x.Id == noteId, cancellationToken);
 
             if (note == null)
-                throw new NotExistExcepttion($"Заметки с id {noteId} не существует");
+                return null;
 
             if (note.DeletedAt != null)
                 return false;
@@ -51,19 +51,39 @@ namespace Notes.Infrastructure.Services
             return true;
         }
 
-        public Task<Note?> GetNoteAsync(Guid noteId, CancellationToken cancellationToken = default)
+        public async Task<Note?> GetNoteAsync(Guid noteId, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            NoteStorageEntity? noteStorage =  await _dbContext.Notes.FirstOrDefaultAsync(x => x.Id == noteId, cancellationToken);
+
+            if (noteStorage == null)
+                return null;
+
+            var note = ConvertEntities.ToDomainEntity(noteStorage);
+
+            return note;
         }
 
-        public Task<List<Note>?> GetNotesListAsync(Guid userId, CancellationToken cancellationToken = default)
+        public async Task<List<Note>> GetNotesListAsync(Guid userId, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var notes = await _dbContext.Notes
+                .Where(x => x.UserId == userId)
+                .ToListAsync(cancellationToken);
+
+            return notes.Select(x => ConvertEntities.ToDomainEntity(x)).ToList();
         }
 
-        public Task<int?> UpdateAsync(Guid noteId, string title, string content, CancellationToken cancellationToken = default)
+        public async Task<int?> UpdateAsync(Guid noteId, string title, string content, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var note = await _dbContext.Notes.FirstOrDefaultAsync(x => x.Id == noteId, cancellationToken);
+
+            if (note == null)
+                return null;
+
+            var noteDomain = ConvertEntities.ToDomainEntity(note);
+            noteDomain.Update(title, content);
+            ConvertEntities.ApplyChanges(note, noteDomain);
+
+            return note.Version;
         }
     }
 }
