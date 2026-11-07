@@ -15,15 +15,15 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// Получить все активные токены пользователя
         /// </summary>
         /// <param name="userId">Id пользователя</param>
-        /// <returns>Список всех активных токенов пользователя. null в случае отсутствия ползователя</returns>
-        public Task<List<RefreshTokenModel>?> GetAllActiveTokensAsync(Guid userId, CancellationToken cancellationToken = default);
+        /// <returns>Список всех активных токенов пользователя</returns>
+        public Task<List<RefreshTokenModel>> GetAllActiveTokensAsync(Guid userId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Получить все токены пользователя
         /// </summary>
         /// <param name="userId">Id пользователя</param>
-        /// <returns>Список всех токенов пользователя. null в случае отсутствия ползователя</returns>
-        public Task<List<RefreshTokenModel>?> GetAllTokensAsync(Guid userId, CancellationToken cancellationToken = default);
+        /// <returns>Список всех токенов пользователя</returns>
+        public Task<List<RefreshTokenModel>> GetAllTokensAsync(Guid userId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Отозвать токен
