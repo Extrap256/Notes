@@ -43,6 +43,16 @@ namespace Notes.Infrastructure.Services
             return storageNote;
         }
 
+        public static void ApplyChanges(NoteStorageEntity target, Note sorce)
+        {
+            target.Id = sorce.Id;
+            target.Title = sorce.Title;
+            target.Content = sorce.Content;
+            target.CreatedAt = sorce.CreatedAt;
+            target.UpdatedAt = sorce.UpdatedAt;
+            target.Version = sorce.Version;
+            target.DeletedAt = sorce.IsDeleted ? sorce.UpdatedAt : null;
+        }
 
 
         /// <summary>
