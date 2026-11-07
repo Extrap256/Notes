@@ -37,6 +37,20 @@
             Version = version;
         }
 
+        private Note(Guid NoteId, Guid userId, string title, string content, int version, bool isDeleted)
+        {
+            Id = NoteId;
+            UserId = userId;
+            Title = title;
+            Content = content;
+            IsDeleted = isDeleted;
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+            Version = version;
+        }
+        public static Note Reconstruct(Guid NoteId, Guid userId, string title, string content, int version, bool isDeleted)
+            => new Note(NoteId, userId, title, content, version, isDeleted);
+
         public void Update(string newTitle, string newContent)
         {
             Title = newTitle;
