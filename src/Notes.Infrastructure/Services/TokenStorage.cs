@@ -26,6 +26,8 @@ namespace Notes.Infrastructure.Services
 
             await _context.RefreshTokens.AddAsync(tokenStorage, cancellationToken);
 
+            await _context.SaveChangesAsync(cancellationToken);
+
             return true;
         }
 
@@ -54,6 +56,8 @@ namespace Notes.Infrastructure.Services
                 return false;
 
             tokenStorage.RevokedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync(cancellationToken);
             return true;
         }
     }
