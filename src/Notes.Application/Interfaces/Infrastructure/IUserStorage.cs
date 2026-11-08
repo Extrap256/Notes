@@ -12,11 +12,18 @@ namespace Notes.Application.Interfaces.Infrastructure
         public Task<bool> AddUserAsync(User user, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Находит пользователя
+        /// Находит пользователя по логину
+        /// </summary>
+        /// <param name="login">Логин пользователя</param>
+        /// <returns>Объект пользователя или null в случае его отсутствия</returns>
+        public Task<User?> GetUserByLoginAsync(string login, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Находит пользователя по id
         /// </summary>
         /// <param name="userId">Id нужного пользователя</param>
         /// <returns>Объект пользователя или null в случае его отсутствия</returns>
-        public Task<User?> GetUserAsync(Guid userId, CancellationToken cancellationToken = default);
+        public Task<User?> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Обновить пользователя
