@@ -33,7 +33,8 @@ namespace Notes.Infrastructure.Services
 
         public async Task<List<RefreshTokenModel>> GetAllActiveTokensAsync(Guid userId, CancellationToken cancellationToken = default)
         {
-            var tokens = await _context.RefreshTokens.Where(x => x.UserId == userId && x.RevokedAt == null).ToListAsync(cancellationToken);
+            DateTime now = DateTime.UtcNow;
+            var tokens = await _context.RefreshTokens.Where(x => x.UserId == userId && (x.RevokedAt == null && x.ExpiresAt > now)).ToListAsync(cancellationToken);
 
             return tokens.Select(x => ConvertEntities.ToApplicationEntity(x)).ToList();
         }
