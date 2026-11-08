@@ -49,24 +49,47 @@ namespace Notes.Infrastructure.Tests.Services
         }
 
         [Fact]
-        public async Task GetUserAsync_WithExistingUser_ReturnUser()
+        public async Task GetUserByIdAsync_WithExistingUser_ReturnUser()
         {
             var user = new User("testLogin", "password");
 
             await _userStorage.AddUserAsync(user);
 
-            var result = await _userStorage.GetUserAsync(user.Id);
+            var result = await _userStorage.GetUserByIdAsync(user.Id);
 
             Assert.NotNull(result);
             Assert.Equal("testLogin", result.Login);
         }
 
         [Fact]
-        public async Task GetUserAsync_WithNotExistingUser_ReturnNull()
+        public async Task GetUserByIdAsync_WithNotExistingUser_ReturnNull()
         {
             var user = new User("testLoginNotExist", "password");
 
-            var result = await _userStorage.GetUserAsync(user.Id);
+            var result = await _userStorage.GetUserByIdAsync(user.Id);
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task GetUserByLoginAsync_WithExistingUser_ReturnUser()
+        {
+            var user = new User("testLogin123", "password");
+
+            await _userStorage.AddUserAsync(user);
+
+            var result = await _userStorage.GetUserByLoginAsync("testLogin123");
+
+            Assert.NotNull(result);
+            Assert.Equal("testLogin123", result.Login);
+        }
+
+        [Fact]
+        public async Task GetUserByLoginAsync_WithNotExistingUser_ReturnNull()
+        {
+            var user = new User("testLoginNotExist123", "password");
+
+            var result = await _userStorage.GetUserByLoginAsync("testLoginNotExist123");
 
             Assert.Null(result);
         }
