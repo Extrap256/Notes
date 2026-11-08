@@ -5,7 +5,7 @@ using Notes.Infrastructure.Data;
 
 namespace Notes.Infrastructure.Services
 {
-    public class UserStorage (NotesServerDBContext context) : IUserStorage
+    public class UserStorage(NotesServerDBContext context) : IUserStorage
     {
         private readonly NotesServerDBContext _dbContext = context;
 
@@ -22,9 +22,19 @@ namespace Notes.Infrastructure.Services
             return true;
         }
 
-        public async Task<User?> GetUserAsync(Guid userId, CancellationToken cancellationToken = default)
+        public async Task<User?> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken = default)
         {
             var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == userId, cancellationToken);
+
+            if (user == null)
+                return null;
+
+            return ConvertEntities.ToDomainEntity(user);
+        }
+
+        public async Task<User?> GetUserByLoginAsync(string login, CancellationToken cancellationToken = default)
+        {
+            var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.Login == login, cancellationToken);
 
             if (user == null)
                 return null;
