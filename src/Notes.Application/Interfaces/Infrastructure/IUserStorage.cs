@@ -8,7 +8,7 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// Добавляет пользователя
         /// </summary>
         /// <param name="user">Объект пользователя</param>
-        /// <returns>true, если добавление успешно и false, если пользователь с таким id уже существует</returns>
+        /// <returns>true, если добавление успешно и false, если пользователь с таким id или логином уже существует</returns>
         public Task<bool> AddUserAsync(User user, CancellationToken cancellationToken = default);
 
         /// <summary>

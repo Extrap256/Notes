@@ -7,7 +7,7 @@
     /// <param name="Hash">Хеш самого токена</param>
     /// <param name="ExpiresAt">ДатаВремя истекания</param>
     /// <param name="IsRevoked">Аннулирован</param>
-    public record StoredRefreshTokenModel(
+    public record RefreshTokenModel(
         Guid UserId,
         string Hash,
         DateTime ExpiresAt,
