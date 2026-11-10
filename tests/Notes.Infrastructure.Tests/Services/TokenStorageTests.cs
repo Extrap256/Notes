@@ -203,5 +203,30 @@ namespace Notes.Infrastructure.Tests.Services
 
             Assert.Null(result);
         }
+
+        [Fact]
+        public async Task GetActiveTokenByHashAsync_GetExistedTeoken_ReturnToken()
+        {
+            var user = await CreateUserAsync("login_getactivetoken_true");
+            var trueToken = CreateTokenModel(user.Id, "trueHash");
+
+            var addingResult = await _tokenStorage.AddTokenAsync(trueToken);
+
+            var token = await _tokenStorage.GetActiveTokenByHashAsync("trueHash");
+
+            Assert.NotNull(token);
+            Assert.Equal(token.UserId, trueToken.UserId);
+        }
+
+        [Fact]
+        public async Task GetActiveTokenByHashAsync_GetNotExistedTeoken_ReturnNull()
+        {
+            var user = await CreateUserAsync("login_getactivetoken_GetNotExisted");
+            var trueToken = CreateTokenModel(user.Id, "trueHash");
+
+            var token = await _tokenStorage.GetActiveTokenByHashAsync("nptExistedHaash");
+
+            Assert.Null(token);
+        }
     }
 }
