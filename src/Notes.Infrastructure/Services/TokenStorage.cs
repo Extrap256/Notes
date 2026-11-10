@@ -31,6 +31,16 @@ namespace Notes.Infrastructure.Services
             return true;
         }
 
+        public async Task<RefreshTokenModel?> GetActiveTokenByHashAsync(string hash, CancellationToken cancellationToken = default)
+        {
+            var result = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Hash == hash, cancellationToken);
+
+            if (result == null)
+                return null;
+
+            return ConvertEntities.ToApplicationEntity(result);
+        }
+
         public async Task<List<RefreshTokenModel>> GetAllActiveTokensAsync(Guid userId, CancellationToken cancellationToken = default)
         {
             DateTime now = DateTime.UtcNow;
