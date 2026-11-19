@@ -55,7 +55,7 @@ namespace Notes.Infrastructure.Services
 
         public async Task<bool> UpdateAsync(Note note, CancellationToken cancellationToken = default)
         {
-            var noteFromStorage = await _dbContext.Notes.FirstOrDefaultAsync(x => x.Id == note.Id, cancellationToken);
+            var noteFromStorage = await _dbContext.Notes.FirstOrDefaultAsync(x => x.Id == note.Id && x.UserId == note.UserId, cancellationToken);
 
             if (noteFromStorage == null)
                 return false;
