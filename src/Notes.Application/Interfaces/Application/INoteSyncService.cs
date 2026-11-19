@@ -46,7 +46,7 @@ namespace Notes.Application.Interfaces.Application
         /// <param name="noteId">Id заметки</param>
         /// <param name="userId">Id пользователя</param>
         /// <returns>true, если заметка удалена. false, если заметка уже была удалена. null, если заметки не существует</returns>
-        public Task<bool?> DeleteAsync(Guid userId, Guid noteId, CancellationToken cancellationToken = default);
+        public Task<Note?> DeleteAsync(Guid userId, Guid noteId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Возвращает список всех удаленных заметок пользователя
