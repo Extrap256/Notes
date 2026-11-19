@@ -47,7 +47,7 @@ namespace Notes.Infrastructure.Services
         public async Task<List<Note>> GetNotesListAsync(Guid userId, CancellationToken cancellationToken = default)
         {
             var notes = await _dbContext.Notes
-                .Where(x => x.UserId == userId)
+                .Where(x => x.UserId == userId && x.DeletedAt == null)
                 .ToListAsync(cancellationToken);
 
             return notes.Select(x => ConvertEntities.ToDomainEntity(x)).ToList();
