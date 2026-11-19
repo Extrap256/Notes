@@ -1,5 +1,4 @@
-﻿using Notes.Application.DTO;
-using Notes.Application.Models;
+﻿using Notes.Application.Models;
 
 namespace Notes.Application.Interfaces.Infrastructure
 {
@@ -16,6 +15,6 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// Генерирует новый refresh токен
         /// </summary>
         /// <returns>Модель refresh токена</returns>
-        public string GenerateRefreshToken();
+        public RefreshTokenIssueModel GenerateRefreshToken();
     }
 }

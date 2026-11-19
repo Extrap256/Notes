@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Notes.Application.DTO;
+using Notes.Application.Models;
 using Notes.Application.Interfaces.Infrastructure;
 using Notes.Domain.Entities;
 using Notes.Infrastructure.Services;
@@ -160,7 +160,7 @@ namespace Notes.Infrastructure.Tests.Services
 
             await _tokenStorage.AddTokenAsync(token);
 
-            var result = await _tokenStorage.RevokeAsync(token);
+            var result = await _tokenStorage.RevokeAsync(token.Hash);
 
             Assert.True(result);
 
@@ -188,7 +188,7 @@ namespace Notes.Infrastructure.Tests.Services
             entity.RevokedAt = DateTime.UtcNow;
             await DbContext.SaveChangesAsync();
 
-            var result = await _tokenStorage.RevokeAsync(token);
+            var result = await _tokenStorage.RevokeAsync(token.Hash);
 
             Assert.False(result);
         }
@@ -199,7 +199,7 @@ namespace Notes.Infrastructure.Tests.Services
             var user = await CreateUserAsync("login_revoke_null");
             var fakeToken = CreateTokenModel(user.Id, "hash_does_not_exist");
 
-            var result = await _tokenStorage.RevokeAsync(fakeToken);
+            var result = await _tokenStorage.RevokeAsync(fakeToken.Hash);
 
             Assert.Null(result);
         }
@@ -212,7 +212,7 @@ namespace Notes.Infrastructure.Tests.Services
 
             var addingResult = await _tokenStorage.AddTokenAsync(trueToken);
 
-            var token = await _tokenStorage.GetActiveTokenByHashAsync("trueHash");
+            var token = await _tokenStorage.GetTokenByHashAsync("trueHash");
 
             Assert.NotNull(token);
             Assert.Equal(token.UserId, trueToken.UserId);
@@ -224,7 +224,7 @@ namespace Notes.Infrastructure.Tests.Services
             var user = await CreateUserAsync("login_getactivetoken_GetNotExisted");
             var trueToken = CreateTokenModel(user.Id, "trueHash");
 
-            var token = await _tokenStorage.GetActiveTokenByHashAsync("nptExistedHaash");
+            var token = await _tokenStorage.GetTokenByHashAsync("nptExistedHaash");
 
             Assert.Null(token);
         }

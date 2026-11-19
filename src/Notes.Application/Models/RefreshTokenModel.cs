@@ -1,4 +1,4 @@
-﻿namespace Notes.Application.DTO
+﻿namespace Notes.Application.Models
 {
     /// <summary>
     /// Модель для refresh токена

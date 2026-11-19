@@ -5,17 +5,17 @@ namespace Notes.Application.Interfaces.Application
     public interface ITokenService
     {
         /// <summary>
-        /// Генерирует новый Access токен
+        /// Обновляет токены
         /// </summary>
         /// <param name="refreshToken">Refresh token</param>
         /// <returns>Пара новых токенов. null, если refresh токен устарел или отстранен</returns>
-        public Task<AuthPairTokenModel?> GetAccessTokenAsync(string refreshToken, CancellationToken cancellationToken = default);
+        public Task<AuthPairTokenModel?> RefreshAsync(string refreshToken, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Обновляет пару токенов
+        /// Создает пару новых токенов
         /// </summary>
         /// <param name="userId">Id пользователя</param>
         /// <returns>Пара новых токенов или null, если пользователь не существует</returns>
-        public Task<AuthPairTokenModel?> GetPairTokensAsync(Guid userId, CancellationToken cancellationToken = default);
+        public Task<AuthPairTokenModel?> IssueTokensAsync(Guid userId, CancellationToken cancellationToken = default);
     }
 }

@@ -32,28 +32,9 @@ namespace Notes.Infrastructure.Services
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<bool?> DeleteAsync(Guid noteId, CancellationToken cancellationToken = default)
+        public async Task<Note?> GetNoteAsync(Guid userId, Guid noteId, CancellationToken cancellationToken = default)
         {
-            var note = await _dbContext.Notes.FirstOrDefaultAsync(x => x.Id == noteId, cancellationToken);
-
-            if (note == null)
-                return null;
-
-            if (note.DeletedAt != null)
-                return false;
-
-            var domainNote = ConvertEntities.ToDomainEntity(note);
-            domainNote.Update(domainNote.Title, domainNote.Content, true);
-            ConvertEntities.ApplyChanges(note, domainNote);
-
-            await _dbContext.SaveChangesAsync(cancellationToken);
-
-            return true;
-        }
-
-        public async Task<Note?> GetNoteAsync(Guid noteId, CancellationToken cancellationToken = default)
-        {
-            NoteStorageEntity? noteStorage =  await _dbContext.Notes.FirstOrDefaultAsync(x => x.Id == noteId, cancellationToken);
+            NoteStorageEntity? noteStorage =  await _dbContext.Notes.FirstOrDefaultAsync(x => x.Id == noteId && x.UserId == userId, cancellationToken);
 
             if (noteStorage == null)
                 return null;
@@ -66,26 +47,32 @@ namespace Notes.Infrastructure.Services
         public async Task<List<Note>> GetNotesListAsync(Guid userId, CancellationToken cancellationToken = default)
         {
             var notes = await _dbContext.Notes
-                .Where(x => x.UserId == userId)
+                .Where(x => x.UserId == userId && x.DeletedAt == null)
                 .ToListAsync(cancellationToken);
 
             return notes.Select(x => ConvertEntities.ToDomainEntity(x)).ToList();
         }
 
-        public async Task<int?> UpdateAsync(Guid noteId, string title, string content, CancellationToken cancellationToken = default)
+        public async Task<bool> UpdateAsync(Note note, CancellationToken cancellationToken = default)
         {
-            var note = await _dbContext.Notes.FirstOrDefaultAsync(x => x.Id == noteId, cancellationToken);
+            var noteFromStorage = await _dbContext.Notes.FirstOrDefaultAsync(x => x.Id == note.Id && x.UserId == note.UserId, cancellationToken);
 
-            if (note == null)
-                return null;
+            if (noteFromStorage == null)
+                return false;
 
-            var noteDomain = ConvertEntities.ToDomainEntity(note);
-            noteDomain.Update(title, content);
-            ConvertEntities.ApplyChanges(note, noteDomain);
+            ConvertEntities.ApplyChanges(noteFromStorage, note);
 
             await _dbContext.SaveChangesAsync(cancellationToken);
+            return true;
+        }
 
-            return note.Version;
+        public async Task<List<Note>> GetDeletedNotesAsync(Guid userId, CancellationToken cancellationToken = default)
+        {
+            var notesFromStorage = _dbContext.Notes.Where(x => x.UserId == userId && x.DeletedAt != null);
+
+            return await notesFromStorage.Select(x => ConvertEntities.ToDomainEntity(x))
+                                         .ToListAsync(cancellationToken);
+
         }
     }
 }

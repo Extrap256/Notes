@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Notes.Application.DTO;
+using Notes.Application.Models;
 using Notes.Application.Interfaces.Infrastructure;
 using Notes.Infrastructure.Data;
 using Notes.Infrastructure.Data.Entities;
@@ -31,7 +31,7 @@ namespace Notes.Infrastructure.Services
             return true;
         }
 
-        public async Task<RefreshTokenModel?> GetActiveTokenByHashAsync(string hash, CancellationToken cancellationToken = default)
+        public async Task<RefreshTokenModel?> GetTokenByHashAsync(string hash, CancellationToken cancellationToken = default)
         {
             var result = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Hash == hash, cancellationToken);
 
@@ -56,9 +56,9 @@ namespace Notes.Infrastructure.Services
             return tokens.Select(x => ConvertEntities.ToApplicationEntity(x)).ToList();
         }
 
-        public async Task<bool?> RevokeAsync(RefreshTokenModel token, CancellationToken cancellationToken = default)
+        public async Task<bool?> RevokeAsync(string hash, CancellationToken cancellationToken = default)
         {
-            var tokenStorage = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Hash == token.Hash, cancellationToken);
+            var tokenStorage = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Hash == hash, cancellationToken);
 
             if (tokenStorage == null)
                 return null;

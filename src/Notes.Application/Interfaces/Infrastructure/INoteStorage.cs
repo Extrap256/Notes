@@ -14,9 +14,10 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// <summary>
         /// Находит заметку по ее Id
         /// </summary>
+        /// <param name="userId">Id пользователя</param>
         /// <param name="noteId">Id заметки</param>
         /// <returns>Объект заметки или null, если ее не существует</returns>
-        public Task<Note?> GetNoteAsync(Guid noteId, CancellationToken cancellationToken = default);
+        public Task<Note?> GetNoteAsync(Guid userId, Guid noteId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Добавляет заметку
@@ -27,17 +28,15 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// <summary>
         /// Обновляет заметку
         /// </summary>
-        /// <param name="noteId">Id существующей заметки</param>
-        /// <param name="title">Новый заголовок</param>
-        /// <param name="content">Новое содержимое</param>
-        /// <returns>Версия новой заметки или null, если ее не существует</returns>
-        public Task<int?> UpdateAsync(Guid noteId, string title, string content, CancellationToken cancellationToken = default);
+        /// <param name="note">Новая версия заметки</param>
+        /// <returns>true, если успешно. false, если нет</returns>
+        public Task<bool> UpdateAsync(Note note, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Помечает существующую заметку как удаленную
+        /// Получение всех удаленных заметок пользователя
         /// </summary>
-        /// <param name="noteId">Id существующей заметки</param>
-        /// <returns>true, если операция успешна. false, если заметка уже была удалена. null, если заметки не существует</returns>
-        public Task<bool?> DeleteAsync(Guid noteId, CancellationToken cancellationToken = default);
+        /// <param name="userId">Id пользователя</param>
+        /// <returns>Список удаленных заметок</returns>
+        public Task<List<Note>> GetDeletedNotesAsync(Guid userId, CancellationToken cancellationToken = default);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Notes.Application.DTO;
+﻿using Notes.Application.Models;
 using Notes.Domain.Entities;
 using Notes.Infrastructure.Data.Entities;
 
@@ -17,6 +17,8 @@ namespace Notes.Infrastructure.Services
                 storageEntity.UserId,
                 storageEntity.Title,
                 storageEntity.Content,
+                storageEntity.CreatedAt,
+                storageEntity.UpdatedAt,
                 storageEntity.Version,
                 storageEntity.DeletedAt != null);
 

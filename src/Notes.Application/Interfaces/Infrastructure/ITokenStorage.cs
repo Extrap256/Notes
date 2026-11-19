@@ -1,4 +1,4 @@
-﻿using Notes.Application.DTO;
+﻿using Notes.Application.Models;
 
 namespace Notes.Application.Interfaces.Infrastructure
 {
@@ -30,13 +30,13 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// </summary>
         /// <param name="token">Токен, который нужно отозвать</param>
         /// <returns>true, если отозвано успешно. false, если токен уже был отозван. null, если токена не существует</returns>
-        public Task<bool?> RevokeAsync(RefreshTokenModel token, CancellationToken cancellationToken = default);
+        public Task<bool?> RevokeAsync(string hash, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Находит refresh токен в базе
         /// </summary>
         /// <param name="hash">Хеш токена</param>
         /// <returns>Модель токена или null, если токен не найден</returns>
-        public Task<RefreshTokenModel?> GetActiveTokenByHashAsync(string hash, CancellationToken cancellationToken = default);
+        public Task<RefreshTokenModel?> GetTokenByHashAsync(string hash, CancellationToken cancellationToken = default);
     }
 }

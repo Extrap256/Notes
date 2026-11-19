@@ -1,4 +1,5 @@
-﻿using Notes.Domain.Entities;
+﻿using Notes.Application.Models;
+using Notes.Domain.Entities;
 
 namespace Notes.Application.Interfaces.Application
 {
@@ -17,10 +18,12 @@ namespace Notes.Application.Interfaces.Application
         /// Обновляет существующую заметку
         /// </summary>
         /// <param name="noteId">Id заметки</param>
+        /// <param name="userId">Id пользователя</param>
         /// <param name="title">Новый заголовок</param>
         /// <param name="content">Новое содержание заметки</param>
+        /// <param name="ExpectedVersion">Предполагаемая текущая версия заметки</param>
         /// <returns>Обновленный объект заметки. null, если такой заметки не существует</returns>
-        public Task<Note?> UpdateNoteAsync(Guid noteId, string title, string content, CancellationToken cancellationToken = default);
+        public Task<UpdateNoteResult> UpdateNoteAsync(Guid userId, Guid noteId, string title, string content, int ExpectedVersion, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Возвращает список заметок пользователя
@@ -33,15 +36,17 @@ namespace Notes.Application.Interfaces.Application
         /// Выдает заметку по id
         /// </summary>
         /// <param name="noteId">Id заметки</param>
+        /// <param name="userId">Id пользователя</param>
         /// <returns>Объект заметки или null, если заметки не существует</returns>
-        public Task<Note?> GetNoteAsync(Guid noteId, CancellationToken cancellationToken = default);
+        public Task<Note?> GetNoteAsync(Guid userId, Guid noteId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Удаляет заметку по id
         /// </summary>
         /// <param name="noteId">Id заметки</param>
+        /// <param name="userId">Id пользователя</param>
         /// <returns>true, если заметка удалена. false, если заметка уже была удалена. null, если заметки не существует</returns>
-        public Task<bool?> DeleteAsync(Guid noteId, CancellationToken cancellationToken = default);
+        public Task<Note?> DeleteAsync(Guid userId, Guid noteId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Возвращает список всех удаленных заметок пользователя
