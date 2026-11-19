@@ -27,11 +27,9 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// <summary>
         /// Обновляет заметку
         /// </summary>
-        /// <param name="noteId">Id существующей заметки</param>
-        /// <param name="title">Новый заголовок</param>
-        /// <param name="content">Новое содержимое</param>
-        /// <returns>Версия новой заметки или null, если ее не существует</returns>
-        public Task<int?> UpdateAsync(Guid noteId, string title, string content, CancellationToken cancellationToken = default);
+        /// <param name="note">Новая версия заметки</param>
+        /// <returns>true, если успешно. false, если нет</returns>
+        public Task<bool> UpdateAsync(Note note, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Помечает существующую заметку как удаленную
