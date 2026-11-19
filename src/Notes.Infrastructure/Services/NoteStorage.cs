@@ -68,7 +68,7 @@ namespace Notes.Infrastructure.Services
 
         public async Task<List<Note>> GetDeletedNotesAsync(Guid userId, CancellationToken cancellationToken = default)
         {
-            var notesFromStorage = _dbContext.Notes.Where(x => x.UserId == userId);
+            var notesFromStorage = _dbContext.Notes.Where(x => x.UserId == userId && x.DeletedAt != null);
 
             return await notesFromStorage.Select(x => ConvertEntities.ToDomainEntity(x))
                                          .ToListAsync(cancellationToken);
