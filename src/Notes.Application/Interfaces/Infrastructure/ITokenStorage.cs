@@ -37,6 +37,6 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// </summary>
         /// <param name="hash">Хеш токена</param>
         /// <returns>Модель токена или null, если токен не найден</returns>
-        public Task<RefreshTokenModel?> GetActiveTokenByHashAsync(string hash, CancellationToken cancellationToken = default);
+        public Task<RefreshTokenModel?> GetTokenByHashAsync(string hash, CancellationToken cancellationToken = default);
     }
 }

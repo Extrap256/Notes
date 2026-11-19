@@ -212,7 +212,7 @@ namespace Notes.Infrastructure.Tests.Services
 
             var addingResult = await _tokenStorage.AddTokenAsync(trueToken);
 
-            var token = await _tokenStorage.GetActiveTokenByHashAsync("trueHash");
+            var token = await _tokenStorage.GetTokenByHashAsync("trueHash");
 
             Assert.NotNull(token);
             Assert.Equal(token.UserId, trueToken.UserId);
@@ -224,7 +224,7 @@ namespace Notes.Infrastructure.Tests.Services
             var user = await CreateUserAsync("login_getactivetoken_GetNotExisted");
             var trueToken = CreateTokenModel(user.Id, "trueHash");
 
-            var token = await _tokenStorage.GetActiveTokenByHashAsync("nptExistedHaash");
+            var token = await _tokenStorage.GetTokenByHashAsync("nptExistedHaash");
 
             Assert.Null(token);
         }

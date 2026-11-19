@@ -31,7 +31,7 @@ namespace Notes.Infrastructure.Services
             return true;
         }
 
-        public async Task<RefreshTokenModel?> GetActiveTokenByHashAsync(string hash, CancellationToken cancellationToken = default)
+        public async Task<RefreshTokenModel?> GetTokenByHashAsync(string hash, CancellationToken cancellationToken = default)
         {
             var result = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Hash == hash, cancellationToken);
 
