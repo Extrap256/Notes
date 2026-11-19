@@ -1,4 +1,4 @@
-﻿using Notes.Application.DTO;
+﻿using Notes.Application.Models;
 using Notes.Domain.Entities;
 using Notes.Infrastructure.Data.Entities;
 

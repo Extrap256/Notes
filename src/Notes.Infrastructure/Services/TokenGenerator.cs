@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Notes.Application.DTO;
+using Notes.Application.Models;
 using Notes.Application.Interfaces.Infrastructure;
 using Notes.Application.Models;
 

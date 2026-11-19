@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Notes.Application.DTO;
+using Notes.Application.Models;
 using Notes.Application.Interfaces.Infrastructure;
 using Notes.Infrastructure.Data;
 using Notes.Infrastructure.Data.Entities;
