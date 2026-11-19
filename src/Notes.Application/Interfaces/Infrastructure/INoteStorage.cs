@@ -37,5 +37,12 @@ namespace Notes.Application.Interfaces.Infrastructure
         /// <param name="noteId">Id существующей заметки</param>
         /// <returns>true, если операция успешна. false, если заметка уже была удалена. null, если заметки не существует</returns>
         public Task<bool?> DeleteAsync(Guid noteId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Получение всех удаленных заметок пользователя
+        /// </summary>
+        /// <param name="userId">Id пользователя</param>
+        /// <returns>Список удаленных заметок</returns>
+        public Task<List<Note>> GetDeletedNotesAsync(Guid userId, CancellationToken cancellationToken = default);
     }
 }
