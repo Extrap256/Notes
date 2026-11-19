@@ -56,9 +56,9 @@ namespace Notes.Infrastructure.Services
             return tokens.Select(x => ConvertEntities.ToApplicationEntity(x)).ToList();
         }
 
-        public async Task<bool?> RevokeAsync(RefreshTokenModel token, CancellationToken cancellationToken = default)
+        public async Task<bool?> RevokeAsync(string hash, CancellationToken cancellationToken = default)
         {
-            var tokenStorage = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Hash == token.Hash, cancellationToken);
+            var tokenStorage = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Hash == hash, cancellationToken);
 
             if (tokenStorage == null)
                 return null;
