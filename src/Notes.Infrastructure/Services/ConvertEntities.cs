@@ -17,6 +17,8 @@ namespace Notes.Infrastructure.Services
                 storageEntity.UserId,
                 storageEntity.Title,
                 storageEntity.Content,
+                storageEntity.CreatedAt,
+                storageEntity.UpdatedAt,
                 storageEntity.Version,
                 storageEntity.DeletedAt != null);
 
