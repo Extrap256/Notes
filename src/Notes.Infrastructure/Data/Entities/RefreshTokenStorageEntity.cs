@@ -21,6 +21,8 @@
 
         // Конструктор для EF Core
         private RefreshTokenStorageEntity()
-        { }
+        {
+            Hash = null!;
+        }
     }
 }
