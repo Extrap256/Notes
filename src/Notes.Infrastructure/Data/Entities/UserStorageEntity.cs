@@ -14,6 +14,9 @@
         }
         // Конструтор для EF Core
         private UserStorageEntity()
-        { }
+        {
+            Login = null!;
+            Password = null!;
+        }
     }
 }

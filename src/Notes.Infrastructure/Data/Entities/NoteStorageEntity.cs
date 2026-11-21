@@ -27,7 +27,8 @@
         // Конструктор для EF Core
         private NoteStorageEntity()
         {
-
+            Title = null!;
+            Content = null!;
         }
     }
 }
